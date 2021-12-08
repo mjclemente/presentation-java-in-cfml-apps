@@ -1,8 +1,0 @@
-target/
-.project
-.settings
-.DS_Store
-.classpath
-.java-version
-
-antisamy.iml
