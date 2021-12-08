@@ -1,17 +1,18 @@
 <cfscript>
-Jsoup = createObject("java", "org.jsoup.Jsoup");
+sanitizer = createObject("java","org.owasp.validator.html.AntiSamy");
 
-doc = Jsoup.connect("https://blog.mattclemente.com").get();
-title = doc.title();
-writeDump(title);
+policyFile = expandPath( 'config/default.xml' );
 
-links = doc.select("a[href]");
-// writeDump( var='#links#', abort='true' );
-for( link in links ){
-  // writeDump(link.wholeText());
-  writeDump(link.attr("abs:href"));
-  // writeDump(link.html());
-  writeOutput('<br>');
-}
+str = "<p> This is a test for
+<h1 onclick= “alert(‘malicious code’);” > AntiSamy </h1>";
 
+clean_results = sanitizer.scan( str, policyFile );
+
+result = [
+  "Input": str,
+  "Cleaned": clean_results.getCleanHTML(),
+  "Errors": clean_results.getErrorMessages()
+]
+
+writeDump(result);
 </cfscript>
