@@ -1,0 +1,12 @@
+# Project Info. This comment refers to the whole document.
+---
+firstName: John
+lastName: Doe
+age: 20
+grades:
+  CS: 10
+  Math: 9
+other:
+  - 1
+  - 2
+  - 3
